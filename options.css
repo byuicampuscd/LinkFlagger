@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Toolbar</title>
-    <meta charset="utf-8">
-    <style>
         /* The switch - the box around the slider */
+
         .switch {
             position: relative;
             display: inline-block;
@@ -65,40 +59,22 @@
         .slider.round:before {
             border-radius: 50%;
         }
-        .item{width:150px; display:flex;align-items: center;}
-        .item span{padding-right:5px; width:125px; text-align:center;}
+
+        .item {
+            width: 150px;
+            display: flex;
+            align-items: center;
+        }
+
+        .item span {
+            padding-right: 5px;
+            width: 125px;
+            text-align: center;
+        }
+
         hr {
-    border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
-}
-    </style>
-</head>
-
-<body>
-
-
-
-        <div style="text-align:center">TOGGLES NOT YET FUNCTIONAL</div>
-    <hr>
-    <div class="item"><span>Enable All</span><label class="switch">
-  <input type="checkbox">
-  <div class="slider round"></div>
-        </label></div>
-    <hr>
-        <div class="item"><span>HTML Editor</span><label class="switch">
-  <input type="checkbox">
-  <div class="slider round"></div>
-        </label></div>
-    <hr>
-            <div class="item"><span>Link Checker</span><label class="switch">
-  <input type="checkbox">
-  <div class="slider round"></div>
-        </label></div>
-
-
-
-</body>
-
-</html>
+            border: 0;
+            height: 1px;
+            background: #333;
+            background-image: linear-gradient(to right, #ccc, #333, #ccc);
+        }
