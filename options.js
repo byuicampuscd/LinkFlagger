@@ -2,11 +2,13 @@
 
  // Saves options to chrome.storage
 function save_options() {
+    var alltoggle = document.getElementById('alltoggle').checked;
   var htmltoggle = document.getElementById('htmltoggle').checked;
   var linktoggle = document.getElementById('linktoggle').checked;
   chrome.storage.sync.set({
+      allsetting: alltoggle,
     htmlsetting: htmltoggle,
-    linksetting: htmltoggle
+    linksetting: linktoggle
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -22,16 +24,17 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
+      allsetting: true,
     htmlsetting: true,
     linksetting: true
   }, function(items) {
-    document.getElementById('htmltoggle').value = items.htmlsetting;
+      document.getElementById('alltoggle').checked = items.allsetting;
+    document.getElementById('htmltoggle').checked = items.htmlsetting;
     document.getElementById('linktoggle').checked = items.linksetting;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',
-    save_options);
+document.getElementById('save').addEventListener('click', save_options);
 
 
 
