@@ -1,16 +1,24 @@
-// ==UserScript==
-// @name        LinkFlagger
-// @version     60
-// @author      Grant Johnson
+// ==LINK FLAGGER==================================================
+// @name        LinkFlagger 2.0
+// @version     0.0
+// @author      A. Didymus Benson
 // @description Highlights brainhoney and box links and images.
-// @include     *brightspace.com*
-// @require     http://code.jquery.com/jquery-latest.js
-// @run-at document-end
-// ==/UserScript==
-window.addEventListener("load", function () {
+// ================================================================
+
 
     if (document.title == "Login - Brigham Young University - Idaho") {
-        swspoilers(); // Log in page easter egg
+        if ( window.addEventListener ) {
+    var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+    window.addEventListener("keydown", function(e){
+        kkeys.push( e.keyCode );
+        if ( kkeys.toString().indexOf( konami ) >= 0 ){
+        	alert("hello");
+          kkeys = [];
+            }
+    }, true);
+}
+
+
     }
 
     // Clean or flag
@@ -23,7 +31,6 @@ window.addEventListener("load", function () {
             dctitle = dctitle.textContent; // if element exsists, reuse variable to title
         }
         if (dctitle == "Edit HTML File") {
-
             fixIssues(); // Fix issues if on edit page
         } else if (ciframe[0].className.indexOf('d2l-iframe') === 0) {
             flagCode(); // Otherwise flag page
@@ -203,7 +210,3 @@ window.addEventListener("load", function () {
         }
     }
 
-    function swspoilers() {
-        $(document.querySelector("h1[class*='d2l-login-portal-heading']")).html('<h1 style="font-size: 24px; text-align: center; color: #ff0000"><span style="font-weight:bold">"OMG, like I-Learn 3 is just the worst.... I-Learn 2 was perfect!!!!"</span></h1><br><img width="100%" src="http://i.imgur.com/UlQYs6T.gif">');
-    }
-});

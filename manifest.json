@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+
+    "name": "Brightspace Tools",
+    "description": "A set of tools for working more efficiently in Brightspace",
+    "version": "0.0",
+
+    "browser_action": {
+        "default_icon": "on.png",
+        "default_popup": "toolbar.html",
+        "default_title": "Manage Tools!"
+    },
+
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "https://ajax.googleapis.com/"
+    ],
+
+    "content_scripts": [{
+        "matches": ["https://byui.brightspace.com/*"],
+        "js": ["jquery-3.1.1.min.js", "content.js"]
+    }],
+
+    "web_accessible_resources": [
+        "script.js"
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    }
+
+}
