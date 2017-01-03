@@ -1,7 +1,10 @@
+//this is an oversimplified cut-and-paste from htmlscript.js
+//the original script had both the html fixer and link fixer
+//in the same file.
 var ciframe = document.querySelectorAll("iframe");
 if (ciframe[0].className.indexOf('d2l-iframe') === 0) {
         flagCode(); // Otherwise flag page
-    }
+}
 
 
 function flagCode() {

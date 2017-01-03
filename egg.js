@@ -5,7 +5,7 @@ if (document.title == "Login - Brigham Young University - Idaho") {
         window.addEventListener("keydown", function (e) {
             kkeys.push(e.keyCode);
             if (kkeys.toString().indexOf(konami) >= 0) {
-                alert("hello");
+                alert("Didymus says hello!");
                 kkeys = [];
             }
         }, true);

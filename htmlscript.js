@@ -1,6 +1,6 @@
 
 
-// Clean or flag
+// TODO: Decide if this can be simplified, then do it.
 var ciframe = document.querySelectorAll("iframe");
 if (ciframe.length > 0) {
     var dctitle = document.querySelector("h1[class*='d2l-page-title']"); // Get the page title.
@@ -14,6 +14,7 @@ if (ciframe.length > 0) {
     }
 }
 
+//Not sure what these variables are for, so...
 var bs, is, brs, divs, bolds, spans, as, empty, altimg, body, emdivs, baddiv, youtube, equila;
 
 function fixIssues() {
