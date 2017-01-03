@@ -22,7 +22,7 @@ function save_options() {
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
+
   chrome.storage.sync.get({
       allsetting: true,
     htmlsetting: true,
@@ -48,37 +48,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-//
-//document.addEventListener('DOMContentLoaded', function () {
-//    document.querySelector('#alltoggle').addEventListener('change', allHandler);
-//    document.querySelector('#htmltoggle').addEventListener('change', htmlHandler);
-//    document.querySelector('#linktoggle').addEventListener('change', linkHandler);
-//
-//
-//    function allHandler() {
-//        //Do Something...maybe another function showAlert(), for instance
-//        if (alltoggle.checked) {
-//            alert("all-toggle checked!");
-//        }
-//
-//    }
-//
-//    function htmlHandler() {
-//        //Do Something...maybe another function showAlert(), for instance
-//        if (htmltoggle.checked) {
-//            alert("html-toggle checked!");
-//        }
-//
-//    }
-//
-//    function linkHandler() {
-//        //Do Something...maybe another function showAlert(), for instance
-//        if (linktoggle.checked) {
-//            alert("link-toggle checked!");
-//        }
-//
-//    }
-//
-//
-//
-//});
+
