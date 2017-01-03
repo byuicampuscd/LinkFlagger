@@ -1,17 +1,53 @@
-/* TODO: Add message listener from background that
- * sends the title of current page here for switch
- * statement below
- */
+// ==LINK FLAGGER==================================================
+// @name        LinkFlagger 2.0
+// @version     0.0
+// @author      A. Didymus Benson
+// @description Highlights brainhoney and box links and images.
+// ================================================================
+
+
+
+var htmlON;
+chrome.storage.sync.get("htmlsetting", function (result) {
+    htmlON = result.htmlsetting;
+    console.log(result.htmlsetting);
+     tryhtml(htmlON);
+});
+
+var linksON;
+chrome.storage.sync.get("linksetting", function (result) {
+    linksON = result.linksetting;
+    console.log(result.linksetting);
+    trylinks(linksON);
+});
+
+function tryhtml(htmlON){
+if (htmlON) {
+    var h = document.createElement('script');
+    h.src = chrome.extension.getURL('htmlscript.js');
+    h.onload = function () {
+        this.remove();
+    };
+    (document.head || document.documentElement).appendChild(h);
+
+}
+}
+
+function trylinks(linksON){
+if (linksON) {
+    var l = document.createElement('script');
+    l.src = chrome.extension.getURL('linkscript.js');
+    l.onload = function () {
+        this.remove();
+    };
+    (document.head || document.documentElement).appendChild(l);
+
+}
+}
 
 var s = document.createElement('script');
-/* TODO: SWITCH STATEMENT BASED ON BRIGHTSPACE URL
- * TO INJECT SMALLSER, MORE SPECIFIC SCRIPTS
- * Add any new scripts to "web_accessible_resources"
- * in manifest.json
- */
-s.src = chrome.extension.getURL('script.js');
-s.onload = function() {
+s.src = chrome.extension.getURL('egg.js');
+s.onload = function () {
     this.remove();
 };
-
 (document.head || document.documentElement).appendChild(s);

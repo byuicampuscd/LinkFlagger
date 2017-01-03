@@ -24,7 +24,9 @@
     }],
 
     "web_accessible_resources": [
-        "script.js"
+        "htmlscript.js",
+        "linkscript.js",
+        "egg.js"
     ],
     "background": {
         "scripts": ["background.js"]
