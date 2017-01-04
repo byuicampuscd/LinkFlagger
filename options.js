@@ -4,16 +4,9 @@ function save_options() {
     var htmltoggle = document.getElementById('htmltoggle').checked;
     var linktoggle = document.getElementById('linktoggle').checked;
     chrome.storage.sync.set({
-        allsetting: alltoggle,
         htmlsetting: htmltoggle,
-        linksetting: linktoggle
-    }, function () {
-        // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(function () {
-            status.textContent = '';
-        }, 750);
+        linksetting: linktoggle,
+        allsetting: alltoggle
     });
 }
 
@@ -32,8 +25,6 @@ function restore_options() {
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -56,4 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
         }
     }
+
+    // IF A TOOLBOX CHANGES, SAVE OPTIONS
+    $('input').change(save_options);
 });
