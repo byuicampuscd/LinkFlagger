@@ -39,7 +39,7 @@ If you add it just before the div called "status" it will be the last tool in th
     <div class="item">
         <span>TOOL NAME</span>
         <label class="switch" for="TOOLNAME-toggle">
-        <input type="checkbox" id="TOOLNAME-toggle">
+        <input type="checkbox" id="TOOLNAME-toggle" class="tool">
         <div class="slider round"></div>
         </label>
     </div>

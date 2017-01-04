@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //ALL-TOGGLE STUFF
     $('.tool').change(function () {
-         //TURN OFF ALL-SWITCH IF ANY OF THE 'TOOLS' IS OFF
+        //TURN OFF ALL-SWITCH IF ANY OF THE 'TOOLS' IS OFF
         if (false == $(this).prop("checked")) {
             $("#alltoggle").prop('checked', $(this).prop("checked"));
         }
