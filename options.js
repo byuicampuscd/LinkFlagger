@@ -47,7 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
         }
     }
-
+    //There's probably a better way to do this. Consider fixing.
+    document.querySelector('#alltoggle').addEventListener('click', disableall);
+    function disableall() {
+        if(!($(this).is(':checked'))){
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        }
+    }
     // IF A TOOLBOX CHANGES, SAVE OPTIONS
     $('input').change(save_options);
 });
