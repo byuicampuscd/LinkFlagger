@@ -34,11 +34,26 @@ function restore_options() {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('#alltoggle').addEventListener('change', allHandler);
 
-    // THE "ENABLE ALL" SWITCH TURNS ON/OFF ALL FEATURES
+document.addEventListener('DOMContentLoaded', function () {
+
+    //ALL-TOGGLE STUFF
+    $('.tool').change(function () {
+         //TURN OFF ALL-SWITCH IF ANY OF THE 'TOOLS' IS OFF
+        if (false == $(this).prop("checked")) {
+            $("#alltoggle").prop('checked', $(this).prop("checked"));
+        }
+        //TURN ON ALL-SWITCH IF ALL OF THE 'TOOLS' ARE ON
+        if ($('.tool:checked').length == $('.tool').length) {
+            $("#alltoggle").prop('checked', true);
+        }
+    });
+
+    document.querySelector('#alltoggle').addEventListener('change', allHandler);
+    //Only enable all if it is checked (not unchecked)
     function allHandler() {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
+        if ($(this).is(':checked')) {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        }
     }
 });
