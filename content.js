@@ -6,7 +6,7 @@
 // ================================================================
 
 
-
+// SETTINGS CHECKERS
 var htmlON;
 chrome.storage.sync.get("htmlsetting", function (result) {
     htmlON = result.htmlsetting;
@@ -21,6 +21,8 @@ chrome.storage.sync.get("linksetting", function (result) {
     trylinks(linksON);
 });
 
+
+//SCRIPT INJECTORS
 function tryhtml(htmlON){
 if (htmlON) {
     var h = document.createElement('script');

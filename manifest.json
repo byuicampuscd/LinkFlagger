@@ -27,9 +27,7 @@
         "htmlscript.js",
         "linkscript.js",
         "egg.js"
-    ],
-    "background": {
-        "scripts": ["background.js"]
-    }
+    ]
+
 
 }
