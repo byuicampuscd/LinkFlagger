@@ -32,7 +32,7 @@ to ensure that it will run properly. After you have written your script:
 
 ### Add an enable/disable option to the options.html popup
 
-Place the following elements in the options.html file at any point after another "<hr>" tag. 
+Place the following elements in the options.html file at any point after another `<hr>` tag. 
 If you add it just before the div called "status" it will be the last tool in the menu.
 
 ```html
