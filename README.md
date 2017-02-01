@@ -4,10 +4,8 @@ Each tool is controlled by a script that can be enabled or disabled as needed.
 
 ## Using LinkFlagger
 
-To choose which scripts are enabled, simply click the big "BS" extension icon and 
-check which scripts you wish to have enabled. As of version 0.0, you will need to
-click the "save settings" button to save your changes. This will be corrected in 
-future updates.
+To choose which scripts are enabled, simply click the extension icon and 
+check which scripts you wish to have enabled. 
 
 ![Popup Options Menu](http://i.imgur.com/e0oomJM.png)
 
