@@ -1,6 +1,6 @@
 # Before Publishing to Chrome Store - Things to correct
 
-## Icon may be necessary 
+## An Icon may be necessary 
 
 ![Include an Icon](http://i.imgur.com/qhS7ySi.png) 
 
