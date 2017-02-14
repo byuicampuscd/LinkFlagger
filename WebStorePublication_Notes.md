@@ -1,3 +1,8 @@
+
+#Actual Bundling Instructions
+
+[This website has the actual instructions for bundling](https://developer.chrome.com/extensions/packaging)
+
 # Before Publishing to Chrome Store - Things to correct
 
 ## An Icon may be necessary 
