@@ -2,6 +2,7 @@
 #Actual packaging Instructions
 
 [This website has the actual instructions for packaging the tool for upload.](https://developer.chrome.com/extensions/overview)
+
 [Additional specifics on packaging can be found here](https://developer.chrome.com/extensions/packaging)
 
 # Before Publishing to Chrome Store - Things to correct
