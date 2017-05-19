@@ -16,7 +16,7 @@ if (ciframe.length > 0) {
 var bs, is, brs, divs, bolds, spans, as, empty, altimg, body, emdivs, baddiv, youtube, equila;
 
 function fixIssues() {
-  $(".d2l-htmleditor-group:last").after('<a type="button" roll="button" class="d2l-button vui-button" id="fixstuff" style="vertical-align: top;"><strong>BETA:</strong> Fix issues. <em>Can interfere with formating</em></a>'); // Generate button
+  $(".d2l-htmleditor-group:last").after('<a type="button" roll="button" class="d2l-button vui-button" id="fixstuff" style="vertical-align: top;">Fix Issues</a>'); // Generate button
   document.getElementById("fixstuff").addEventListener("click", function () {
     cleanCode(); // actualy clean the code
     cleanCode(); // Run again for good measure

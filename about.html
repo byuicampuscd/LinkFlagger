@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>Tech Ops Tools Attributions</title>
+  <title>About Tech Ops Tools</title>
   <meta charset="utf-8">
   <style>
     .container {
       width: 500px;
+      max-height: 900px;
+      padding: 20px;
     }
 
   </style>
@@ -14,6 +16,24 @@
 
 <body>
   <div class="container">
+    <a href="options.html">Back</a>
+    <h2>Link Flagger</h2>
+    <p>The link flagger will scan every link tag in brightspace and see if it passes certain tests</p>
+    <p>Differently colored links represent different issues:</p>
+    <ul>
+      <li>Blue: No Title attribute found</li>
+      <li>Yellow: Link does not open in a new tab</li>
+      <li>Red: The filepath doesn't have the words 'Course Files' or 'Content Files'.</li>
+    </ul>
+    <h2>HTML Fixer</h2>
+    <p>The HTML Fixer was built to correct poorly marked up content pages on the transition from I-Learn 2.0. It will scan html in content pages, and fix many common issues.</p>
+    <p>The tool ads a button to the edit html frame, which execute the following when clicked:</p>
+    <ul>
+      <li>Changing &lt;b&gt; to &lt;strong&gt;</li>
+      <li>Changing &lt;i&gt; to &lt;em&gt;</li>
+      <li>Removing empty tags</li>
+    </ul>
+
     <h2>Attributions</h2>
     <h3>Jquery:</h3>
     <p>Copyright JS Foundation and other contributors, https://js.foundation/</p>

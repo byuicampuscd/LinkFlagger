@@ -4,7 +4,7 @@
   "name": "Tech Ops Tools",
   "description": "A set of tools for working more efficiently in Brightspace",
   "version": "1.0",
-  "options_page": "legal.html",
+  "options_page": "about.html",
   "browser_action": {
     "default_icon": "extension-icon-32.png",
     "default_popup": "options.html",
