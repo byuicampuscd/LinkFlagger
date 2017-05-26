@@ -1,0 +1,11 @@
+{
+  "name": "tech-ops-tool",
+  "version": "1.0.0",
+  "description": "Flags Links, among other things.",
+  "main": "",
+  "scripts": {
+    "test": "NA"
+  },
+  "author": "Ben Harker",
+  "license": "UNLICENSED",
+}
