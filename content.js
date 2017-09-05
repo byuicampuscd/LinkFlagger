@@ -47,9 +47,29 @@ function trylinks(linksON) {
   }
 }
 
+
+
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('egg.js');
 s.onload = function () {
   this.remove();
 };
 (document.head || document.documentElement).appendChild(s);
+
+
+
+/****************************** EDIT HTML OF LINKS **************************************/
+/* Does the heavy lifting */
+var editFiles = function (url, pageurl) {
+    console.log(url, pageurl);
+}
+
+/* Listens for a context menu click */
+chrome.extension.onMessage.addListener(function (message, sender, callback) {
+    if (message.functiontoInvoke == "editFiles") {
+        editFiles(message.linkUrl, message.pageUrl);
+    }
+});
+
+
+

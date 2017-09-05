@@ -19,9 +19,14 @@
         "storage",
         "tabs",
         "activeTab",
+      "contextMenus",
         "https://ajax.googleapis.com/"
     ],
-
+ "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
   "content_scripts": [{
     "matches": ["https://byui.brightspace.com/*"],
     "js": ["jquery-3.1.1.min.js", "content.js"]

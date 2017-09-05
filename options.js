@@ -4,7 +4,7 @@ function save_options() {
   var alltoggle = document.getElementById('alltoggle').checked;
   var htmltoggle = document.getElementById('htmltoggle').checked;
   var linktoggle = document.getElementById('linktoggle').checked;
-  chrome.storage.sync.set({
+  chrome.storage.sync.set
     htmlsetting: htmltoggle,
     linksetting: linktoggle,
     allsetting: alltoggle
@@ -23,6 +23,7 @@ function restore_options() {
     document.getElementById('alltoggle').checked = items.allsetting;
     document.getElementById('htmltoggle').checked = items.htmlsetting;
     document.getElementById('linktoggle').checked = items.linksetting;
+
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
