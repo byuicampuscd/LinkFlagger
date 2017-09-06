@@ -62,7 +62,7 @@ s.onload = function () {
 /* Does the heavy lifting */
 var editFiles = function (url, pageurl) {
 
-    getOU(linkUrl) {
+    function getOU(linkUrl) {
       var ou;
       if (linkUrl.includes('ou=')) {
         ou = linkUrl.split('ou=')[1].split('&')[0].replace('"', '');
@@ -72,12 +72,12 @@ var editFiles = function (url, pageurl) {
         ou = linkUrl.split('/content/')[1].split('/')[0];
       }
       console.log(ou);
+      return ou;
     }
 
-    var courseOU = getOU(url);
     console.log(url, pageurl);
 
-    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + courseOU + "&editFlag", "_blank");
+    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + '&editFlag', "_blank");
 }
 
 /* Listens for a context menu click */
