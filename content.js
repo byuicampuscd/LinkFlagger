@@ -77,7 +77,7 @@ var editFiles = function (url, pageurl) {
     var courseOU = getOU(url);
     console.log(url, pageurl);
 
-    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + courseOU, "_blank");
+    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + courseOU + "&editFlag", "_blank");
 }
 
 /* Listens for a context menu click */
@@ -85,4 +85,14 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.functiontoInvoke == "editFiles") {
         editFiles(message.linkUrl, message.pageUrl);
     }
+});
+$( document ).ready(function() {
+    var url = window.location.href;
+  if (url.includes("&editFlag")){
+        //navigate to file and open in editor
+      console.log("woo");
+
+
+
+  }
 });
