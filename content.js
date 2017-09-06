@@ -77,7 +77,7 @@ var editFiles = function (url, pageurl) {
 
     console.log(url, pageurl);
 
-    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + '&editFlag', "_blank");
+    chrome.runtime.sendMessage({url: "https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + "&editFlag", greeting:"newTab"});
 }
 
 /* Listens for a context menu click */
@@ -86,6 +86,7 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
         editFiles(message.linkUrl, message.pageUrl);
     }
 });
+
 $( document ).ready(function() {
     var url = window.location.href;
   if (url.includes("&editFlag")){
