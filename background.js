@@ -17,14 +17,13 @@ function editInCourseFiles(info, tab) {
 }
 
 // Create one test item for each context type.
-var contexts = ["link"];
-for (var i = 0; i < contexts.length; i++) {
-    var context = contexts[i];
-    var title = "Edit in File Manager";
-    var id = chrome.contextMenus.create({
-        "title": title,
-        "contexts": [context],
-        "onclick": editInCourseFiles
-    });
-    console.log("'" + context + "' item:" + id);
-}
+chrome.contextMenus.create({
+  title: 'Edit File in Course',
+  contexts: ['link'],
+  onclick: editInCourseFiles,
+  targetUrlPatterns: [
+    'https://*.brightspace.com/d2l/le/content/*',
+    'https://*.brightspace.com/d2l/common/dialogs/quickLink/*',
+    'https://*.brightspace.com/d2l/common/viewFile.d2lfile/*'
+  ]
+});

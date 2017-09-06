@@ -61,7 +61,23 @@ s.onload = function () {
 /****************************** EDIT HTML OF LINKS **************************************/
 /* Does the heavy lifting */
 var editFiles = function (url, pageurl) {
+
+    getOU(linkUrl) {
+      var ou;
+      if (linkUrl.includes('ou=')) {
+        ou = linkUrl.split('ou=')[1].split('&')[0].replace('"', '');
+      } else if (linkUrl.includes('enforced')) {
+        ou = linkUrl.split('/enforced/')[1].split('-')[0];
+      } else {
+        ou = linkUrl.split('/content/')[1].split('/')[0];
+      }
+      console.log(ou);
+    }
+
+    var courseOU = getOU(url);
     console.log(url, pageurl);
+
+    window.open("https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + courseOU, "_blank");
 }
 
 /* Listens for a context menu click */
@@ -70,6 +86,3 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
         editFiles(message.linkUrl, message.pageUrl);
     }
 });
-
-
-
