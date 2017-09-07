@@ -85,15 +85,13 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.functiontoInvoke == "editFiles") {
         editFiles(message.linkUrl, message.pageUrl);
     }
+    if (message.functiontoInvoke == "navToEditor"){
+        navToEditor(message.url);
+    }
 });
 
-$( document ).ready(function() {
-    var url = window.location.href;
-  if (url.includes("&editFlag")){
-        //navigate to file and open in editor
-      console.log("woo");
 
+function navToEditor(url){
+    console.log(url);
+}
 
-
-  }
-});

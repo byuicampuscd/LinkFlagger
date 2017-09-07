@@ -21,10 +21,10 @@ function editInCourseFiles(info, tab) {
 
 // Create one test item for each context type.
 chrome.contextMenus.create({
-  title: 'Edit File in Course',
-  contexts: ['link'],
-  onclick: editInCourseFiles,
-  targetUrlPatterns: [
+    title: 'Edit File in Course',
+    contexts: ['link'],
+    onclick: editInCourseFiles,
+    targetUrlPatterns: [
     'https://*.brightspace.com/d2l/le/content/*',
     'https://*.brightspace.com/d2l/common/dialogs/quickLink/*',
     'https://*.brightspace.com/d2l/common/viewFile.d2lfile/*'
@@ -34,6 +34,18 @@ chrome.contextMenus.create({
 
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.greeting == "newTab") {
-        chrome.tabs.create({url: message.url});
+        chrome.tabs.create({
+            url: message.url
+        });
+        chrome.tabs.query({
+            "active": true,
+            "currentWindow": true
+        }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                "functiontoInvoke": "editFiles",
+                "linkUrl": JSON.stringify(info.linkUrl),
+                "pageUrl": JSON.stringify(info.pageUrl)
+            });
+        });
     }
 });
