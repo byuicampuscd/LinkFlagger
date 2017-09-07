@@ -77,7 +77,7 @@ var editFiles = function (url, pageurl) {
 
     console.log(url, pageurl);
 
-    chrome.runtime.sendMessage({url: "https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + "&editFlag", greeting:"newTab"});
+    chrome.runtime.sendMessage({url: "https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + "&editFlag", directory: url, greeting:"newTab"});
 }
 
 /* Listens for a context menu click */
@@ -86,7 +86,7 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
         editFiles(message.linkUrl, message.pageUrl);
     }
     if (message.functiontoInvoke == "navToEditor"){
-        navToEditor(message.url);
+        navToEditor(message.linkUrl);
     }
 });
 
@@ -95,3 +95,4 @@ function navToEditor(url){
     console.log(url);
 }
 
+chrome.runtime.sendMessage({greeting:"I'm Alive"});

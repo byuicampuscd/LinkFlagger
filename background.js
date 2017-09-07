@@ -31,21 +31,26 @@ chrome.contextMenus.create({
   ]
 });
 
-
+var flippy_bit = 0;
+var temp_url = '';
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.greeting == "newTab") {
+        temp_url = message.directory;
+        flippy_bit = 1;
         chrome.tabs.create({
             url: message.url
         });
+    }
+    if (message.greeting == "I'm Alive" && flippy_bit == 1) {
         chrome.tabs.query({
             "active": true,
             "currentWindow": true
         }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
-                "functiontoInvoke": "editFiles",
-                "linkUrl": JSON.stringify(info.linkUrl),
-                "pageUrl": JSON.stringify(info.pageUrl)
+                "functiontoInvoke": "navToEditor",
+                "linkUrl": JSON.stringify(temp_url)
             });
         });
+        flippy_bit = 0;
     }
 });
