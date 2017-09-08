@@ -27,30 +27,36 @@ chrome.contextMenus.create({
     targetUrlPatterns: [
     'https://*.brightspace.com/d2l/le/content/*',
     'https://*.brightspace.com/d2l/common/dialogs/quickLink/*',
-    'https://*.brightspace.com/d2l/common/viewFile.d2lfile/*'
+    'https://*.brightspace.com/d2l/common/viewFile.d2lfile/*',
+    'https://*.brightspace.com/content/enforced/*'
   ]
 });
 
-var flippy_bit = 0;
 var temp_url = '';
+var newTabId = 0;
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
     if (message.greeting == "newTab") {
-        temp_url = message.directory;
-        flippy_bit = 1;
+        temp_url = message.directory.replace(/"/g, '');
+        console.log(temp_url);
         chrome.tabs.create({
-            url: message.url
+            url: message.url.replace(/"/g, '')
+        }, (tab) => {
+          newTabId = tab.id;
+          chrome.tabs.sendMessage(tab.id, {
+              "functiontoInvoke": "navToEditor",
+              "linkUrl": temp_url
+          });
         });
     }
-    if (message.greeting == "I'm Alive" && flippy_bit == 1) {
-        chrome.tabs.query({
-            "active": true,
-            "currentWindow": true
-        }, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                "functiontoInvoke": "navToEditor",
-                "linkUrl": JSON.stringify(temp_url)
-            });
-        });
-        flippy_bit = 0;
-    }
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  console.log(newTabId, tab.id, tab.status);
+  if (tab.id === newTabId && tab.status === 'complete') {
+    console.log('It lives');
+    chrome.tabs.sendMessage(tab.id, {
+        "functiontoInvoke": "navToEditor",
+        "linkUrl": temp_url
+    });
+  }
 });

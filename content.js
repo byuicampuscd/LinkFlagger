@@ -61,24 +61,15 @@ s.onload = function () {
 /****************************** EDIT HTML OF LINKS **************************************/
 /* Does the heavy lifting */
 var editFiles = function (url, pageurl) {
-
-    function getOU(linkUrl) {
-      var ou;
-      if (linkUrl.includes('ou=')) {
-        ou = linkUrl.split('ou=')[1].split('&')[0].replace('"', '');
-      } else if (linkUrl.includes('enforced')) {
-        ou = linkUrl.split('/enforced/')[1].split('-')[0];
-      } else {
-        ou = linkUrl.split('/content/')[1].split('/')[0];
-      }
-      console.log(ou);
-      return ou;
-    }
-
-    console.log(url, pageurl);
-
-    chrome.runtime.sendMessage({url: "https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + getOU(url) + "&editFlag", directory: url, greeting:"newTab"});
+  if (url.includes('enforced')) {
+    var ou = url.split('/enforced/')[1].split('-')[0];
+    chrome.runtime.sendMessage({url: "https://byui.brightspace.com/d2l/lp/manageFiles/main.d2l?ou=" + ou + "&editFlag", directory: url, greeting:"newTab"});
+  } else if (url.includes('ou=') || url.includes('/content/')) {
+    chrome.runtime.sendMessage({url: url, directory: url, greeting:"newTab"});
+  }
+  console.log(url, pageurl);
 }
+
 
 /* Listens for a context menu click */
 chrome.extension.onMessage.addListener(function (message, sender, callback) {
@@ -86,13 +77,114 @@ chrome.extension.onMessage.addListener(function (message, sender, callback) {
         editFiles(message.linkUrl, message.pageUrl);
     }
     if (message.functiontoInvoke == "navToEditor"){
+        console.log(message.linkUrl);
         navToEditor(message.linkUrl);
+    }
+    if (message.functiontoInvoke == "clickEditHTML"){
+        console.log(message.linkUrl);
+        clickEditHTML();
     }
 });
 
 
 function navToEditor(url){
-    console.log(url);
-}
+  if (!url.includes('enforced') && !url.includes('EditFile')) {
+    $(document).ready(() => {
+      $('span:contains("Edit HTML")').click();
+    });
+    return;
+  }
+  if (url) {
+    var split = url.split('/enforced/')[1].replace(/%20/g, ' ').split('/');
+    console.log(split);
+    split[split.length - 1] = split[split.length - 1].split('?')[0];
+    console.log(split[split.length -1]);
 
-chrome.runtime.sendMessage({greeting:"I'm Alive"});
+    function waitFor(selector, callback) {
+      var original;
+        var loop = setInterval(() => {
+          if ($(selector).length > 0) {
+            clearInterval(loop);
+            callback();
+          }
+        }, 100);
+    }
+
+    function waitForInnerFrame(callback) {
+      var coop = setInterval(() => {
+        if ($('iframe[title="Edit File"]').get(0).contentDocument.querySelectorAll('iframe[title="Content"]').length > 0) {
+          clearInterval(coop);
+          callback();
+        }
+      }, 100);
+    }
+
+    function resizeInnerWindow(callback) {
+      var woop = setInterval(() => {
+        if ($('iframe[title="Edit File"]').get(0).contentDocument.querySelectorAll('.d2l-htmleditor-iframecontainer').length > 0) {
+          clearInterval(woop);
+          callback();
+        }
+        console.log('searching');
+      }, 100);
+    }
+
+    function resizeWindow() {
+      console.log('resizing');
+      waitFor('iframe[title="Edit File"]', () => {
+        console.log('loaded1');
+        waitForInnerFrame(() => {
+          console.log('loaded2');
+          $('.ddial_o').css({left: '70px', top: '35px', width: '93.5vw', height: '92vh'});
+          $('.ddial_c').css({height: '77vh'});
+          resizeInnerWindow(() => {
+            $('iframe[title="Edit File"]').get(0).contentDocument.querySelector('.d2l-htmleditor-iframecontainer').style.height = '65.4vh';
+          });
+        });
+      });
+    }
+
+    function scrollDown(fileName) {
+      if ($('span:contains(' + fileName + ')').length > 0) {
+        var event = new MouseEvent('click', {
+          bubbles: false,
+          cancelable: false,
+          view: window
+        });
+        document.querySelector('a[title*="Actions for ' + fileName + '"]').dispatchEvent(event);
+        $('span:contains("Edit File")').click();
+        resizeWindow();
+        return;
+      } else {
+        setTimeout(() => {
+          $('#z_m > div:nth-child(2) > div.dsl_p_m_f > div').scrollTop($("#z_m > div:nth-child(2) > div.dsl_p_m_f > div")[0].scrollHeight);
+          scrollDown(fileName);
+        }, 200)
+      }
+    }
+
+    console.log(split.length);
+    split.forEach((dir) => {
+      if (!dir.includes('.html')) {
+        $('span:contains(' + dir + ')').click();
+      } else {
+        // Scroll down
+        $('#z_m > div:nth-child(2) > div.dsl_p_m_f > div').ready(() => {
+            scrollDown(dir);
+        });
+      }
+
+    });
+
+    // Scroll to bottom to load all files
+
+
+    /**/
+    // Click edit on right file
+    console.log(url);
+  } else {
+    // For content view pages
+    console.log('Content Page');
+
+  }
+}
