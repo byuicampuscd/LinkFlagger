@@ -6,7 +6,7 @@
 // @author      A. Didymus Benson, Zachary Williams
 // @description Highlights brainhoney and box links and images.
 // ================================================================
-
+console.log('Injected');
 // SETTINGS CHECKERS
 var htmlON;
 chrome.storage.sync.get("htmlsetting", function(result) {
@@ -18,6 +18,12 @@ var linksON;
 chrome.storage.sync.get("linksetting", function(result) {
   linksON = result.linksetting;
   trylinks(linksON);
+});
+
+var highlightON;
+chrome.storage.sync.get("highlightsetting", function(result) {
+  highlightON = result.highlightsetting;
+  tryhighlight(highlightON);
 });
 
 //SCRIPT INJECTORS
@@ -40,6 +46,18 @@ function trylinks(linksON) {
       this.remove();
     };
     (document.head || document.documentElement).appendChild(l);
+  }
+}
+
+function tryhighlight(highlightON) {
+  console.log(highlightON);
+  if (highlightON) {
+    var c = document.createElement('script');
+    c.src = chrome.extension.getURL('highlightscript.js');
+    c.onload = function() {
+      this.remove();
+    };
+    (document.head || document.documentElement).appendChild(c);
   }
 }
 

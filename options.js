@@ -4,10 +4,12 @@ function save_options() {
   var alltoggle = document.getElementById('alltoggle').checked;
   var htmltoggle = document.getElementById('htmltoggle').checked;
   var linktoggle = document.getElementById('linktoggle').checked;
-  chrome.storage.sync.set
+  var highlighttoggle = document.getElementById('highlighttoggle').checked;
+  chrome.storage.sync.set({
     htmlsetting: htmltoggle,
     linksetting: linktoggle,
-    allsetting: alltoggle
+    allsetting: alltoggle,
+    highlightsetting: highlighttoggle
   });
 }
 
@@ -18,12 +20,13 @@ function restore_options() {
   chrome.storage.sync.get({
     allsetting: false,
     htmlsetting: false,
-    linksetting: false
+    linksetting: false,
+    highlightsetting: false,
   }, function (items) {
     document.getElementById('alltoggle').checked = items.allsetting;
     document.getElementById('htmltoggle').checked = items.htmlsetting;
     document.getElementById('linktoggle').checked = items.linksetting;
-
+    document.getElementById('highlighttoggle').checked = items.highlightsetting;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
